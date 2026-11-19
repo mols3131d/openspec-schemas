@@ -21,12 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: jdx/mise-action@v5
-      - name: Initial agent source installation and frozen recovery
+      - name: Restore locked external Agent Skills and preview projections
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          mise run agents-smoke
           test -s rulesync.lock
-          echo '--- reviewed-lock-candidate-start ---'
-          cat rulesync.lock
-          echo '--- reviewed-lock-candidate-end ---'
+          mise run agents-restore
+          mise run agents-preview

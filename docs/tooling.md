@@ -18,7 +18,7 @@ mise run check
 
 OpenSpec CLI는 `mise.toml`의 명시한 버전으로 관리한다. 저장소의 `src/schemas/`는 배포 원본이며 OpenSpec의 프로젝트 탐색 경로가 아니다. 검증은 임시 프로젝트의 `openspec/schemas/`에 복사해 진행한다.
 
-`setup`은 Rulesync 소스를 가져오고 런타임별 projection·ignore 항목과 `rulesync.lock`을 생성하거나 기존 lock을 사용합니다. 이 clone의 Git commit template도 설정합니다. 잠금 파일과 생성 결과는 검토한 뒤 커밋합니다. CI의 OpenSpec 임시 검증과 외부 Skills의 설치는 별개다. Agent asset 통합 workflow는 읽기 전용 토큰으로 외부 GitHub 소스를 조회하며 임시 runner에서 설치·복원을 확인한다. 로컬 자산 설치 결과는 이 PR의 정적 검사만으로 보장되지 않는다.
+`setup`은 Rulesync 소스를 가져오고 런타임별 projection·ignore 항목과 `rulesync.lock`을 생성하거나 기존 lock을 사용합니다. 이 clone의 Git commit template도 설정합니다. 잠금 파일과 생성 결과는 검토한 뒤 커밋합니다. 이 PR에서는 격리된 GitHub Actions 환경에서 최초 설치·잠금 기반 복원·projection 미리보기를 검증하고 `rulesync.lock`을 반영했다. CI의 OpenSpec 임시 검증과 외부 Skills의 설치는 별개다. Agent asset 통합 workflow는 읽기 전용 토큰으로 외부 GitHub 소스를 조회하며 검토된 `rulesync.lock` 기준으로 임시 runner에서 frozen restore와 projection preview를 검증한다. 로컬 자산 설치 결과는 이 PR의 정적 검사만으로 보장되지 않는다.
 
 기존 lock을 재현할 때는 `mise run agents-restore`, upstream을 의도적으로 갱신할 때는 `mise run agents-refresh`를 사용합니다. 설치된 자산의 projection은 `mise run agents-preview`로 확인합니다. `mise run agents-retire -- <targets> --features <features> [--apply]`는 은퇴한 생성물 정리를 미리 보고, 제거를 승인했을 때만 `--apply`를 사용합니다.
 
