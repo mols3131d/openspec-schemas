@@ -8,6 +8,12 @@ exclude = [
   "**/archive/",
   "**/*.tmp.*",
   ".rumdl_cache/**",
+  "node_modules/",
+  ".rulesync/skills/.curated/**",
+  ".rulesync/rules/.curated/**",
+  ".agents/skills/**",
+  ".claude/skills/**",
+  ".github/skills/**",
 ]
 
 extend-enable = [

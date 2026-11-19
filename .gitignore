@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local overrides and generated Agent Asset caches
+*.local
+*.local.*
+node_modules/
+.rumdl_cache/
+.rulesync/skills/.curated/
+.rulesync/rules/.curated/
+
+# Temporary files and backups
+*.tmp
+*.tmp.*
+*.bak
+*.bak.*
+*.orig
+*.orig.*
+*.tsbuildinfo
