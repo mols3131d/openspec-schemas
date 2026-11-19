@@ -36,6 +36,7 @@ openspec-schemas/
 mise install
 mise run setup
 mise run check
+mise run schema-check
 ```
 
-설치와 최초 Rulesync 동기화는 외부 다운로드·로컬 쓰기를 포함하므로 설정을 검토한 다음 실행합니다. `mise run check`는 정적 도구 검사이며 OpenSpec 런타임 검증을 대신하지 않습니다.
+설치와 최초 Rulesync 동기화는 외부 다운로드·로컬 쓰기를 포함하므로 설정을 검토한 다음 실행합니다. `mise run schema-check`는 임시 OpenSpec 프로젝트에서 스키마를 검증한다. 실제 외부 저장소 배포와 Skill 로딩은 별도로 확인해야 한다.

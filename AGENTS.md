@@ -18,5 +18,5 @@
 
 ## Verification
 
-- Verify YAML syntax, the artifact DAG, parser-facing Markdown and baseline invariants when relevant. Run project checks and targeted runtime validation where available.
+- Verify YAML syntax, the artifact DAG, parser-facing Markdown and baseline invariants when relevant. Run `mise run schema-check` for the repository-authored OpenSpec schemas; their runtime tests stage them in a temporary OpenSpec project. Run project checks and targeted runtime validation where available.
 - Review the actual final diff and report skipped, failed or unavailable verification. Passing lint or a PR review alone does not demonstrate OpenSpec runtime compatibility.

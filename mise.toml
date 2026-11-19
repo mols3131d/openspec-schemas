@@ -6,6 +6,7 @@ rumdl = "0"
 "npm:@biomejs/biome" = "2"
 lefthook = "2"
 "npm:rulesync" = "43"
+"npm:@fission-ai/openspec" = "2.1.0"
 
 [settings]
 task.run_auto_install = false
@@ -39,6 +40,19 @@ run = "node scripts/manage-agent-assets.ts refresh"
 description = "Preview retired target/feature cleanup; add --apply to remove generated outputs and sync ignores"
 run = "node scripts/manage-agent-assets.ts retire"
 
+[tasks.schema-check]
+description = "Validate src/schemas using the pinned OpenSpec CLI in an isolated temporary project"
+run = "node scripts/check-openspec-schemas.ts"
+
+[tasks.agents-smoke]
+description = "Opt-in integration smoke: install, preview, frozen restore and preview agent projections (writes local state)"
+run = [
+  "node scripts/manage-agent-assets.ts setup",
+  "node scripts/manage-agent-assets.ts preview",
+  "node scripts/manage-agent-assets.ts restore",
+  "node scripts/manage-agent-assets.ts preview",
+]
+
 [tasks.format]
 description = "Format Markdown and Biome-supported files across the repository; writes changes"
 run = [
@@ -47,10 +61,11 @@ run = [
 ]
 
 [tasks.check]
-description = "Read-only repository checks; not OpenSpec runtime validation"
+description = "Read-only checks, including a temporary-project OpenSpec runtime smoke test"
 run = [
   "rumdl check .",
   "rumdl fmt --check .",
   "biome check .",
   "lefthook validate",
+  "node scripts/check-openspec-schemas.ts",
 ]
