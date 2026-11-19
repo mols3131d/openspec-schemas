@@ -1,12 +1,12 @@
 # Tools and agent asset tasks for the OpenSpec schema repository.
 # Review external downloads and version changes before installing.
 [tools]
-node = "26.13.1"
-rumdl = "0.3.5"
-"npm:@biomejs/biome" = "2.6.8"
-lefthook = "2.2.2"
-"npm:rulesync" = "43.9.2"
-"npm:@fission-ai/openspec" = "2.1.0"
+node = "26"
+rumdl = "0"
+"npm:@biomejs/biome" = "2"
+lefthook = "2"
+"npm:rulesync" = "43"
+"npm:@fission-ai/openspec" = "2"
 
 [settings]
 task.run_auto_install = false
@@ -45,7 +45,7 @@ description = "Lint and format-check tracked Markdown except noncanonical inbox 
 run = "node scripts/check-markdown.ts"
 
 [tasks.schema-check]
-description = "Validate src/schemas using the pinned OpenSpec CLI in an isolated temporary project"
+description = "Validate src/schemas using the configured OpenSpec CLI in an isolated temporary project"
 run = "node scripts/check-openspec-schemas.ts"
 
 [tasks.agents-smoke]
