@@ -3,8 +3,8 @@
 ## Scope and discovery
 
 - Confirm repository, ref, changed paths and existing work before editing. Read applicable `AGENTS.md` files from the root down to each target directory.
-- Use [Documentation](docs/README.md) to locate repository standards and [Schema development](docs/development.md) for the OpenSpec schema contract. For a schema change, inspect its `README.md`, `schema.yaml`, templates and `docs/baseline.md` as applicable.
-- Treat schema YAML and templates as runtime and parser-facing contracts. Markdown descriptions do not replace verification of those contracts.
+- Use [Documentation](docs/README.md) to locate repository standards. [src/](src/README.md) owns reusable sources intended for distribution; [Schema development](docs/development.md) owns the OpenSpec schema layout and contract. For a schema change, inspect its `README.md`, `schema.yaml`, templates and `docs/baseline.md` as applicable.
+- Treat `src/schemas/` YAML and templates as runtime and parser-facing contracts. Keep `src/skills/` for repository-authored reusable Skills; do not confuse it with installed or generated vendor Skill projections. Markdown descriptions do not replace verification of those contracts.
 - [CHATBOT.md](CHATBOT.md) is a chat-runtime compatibility entrypoint, not a second policy source.
 
 ## Safe changes

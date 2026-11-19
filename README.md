@@ -4,25 +4,29 @@
 
 ## Goals
 
-- 재사용 가능한 커스텀 스키마 유지보수
+- 재사용 가능한 스키마와 Skill 등 배포 가능한 자산의 원본을 [src/](src/README.md)에서 관리
 
 ## Directory Structure
 
 ```text
 openspec-schemas/
 ├── docs/
-├── schemas/                   # OpenSpec 커스텀 스키마 모음
-│   └── <schema-name>/
+├── src/                       # 다른 저장소에도 배포 가능한 자산의 원본
+│   ├── schemas/               # OpenSpec 커스텀 스키마
+│   │   └── <schema-name>/
+│   └── skills/                # 재사용 가능한 Agent Skills
 ├── AGENTS.md
 ├── CHATBOT.md
 └── README.md
 ```
 
+`src/`의 배치만으로 외부 저장소에 자동 배포되지는 않습니다. 배포 방식과 대상은 별도로 정의합니다.
+
 ## Schemas
 
 | Schema | Description |
 | --- | --- |
-| [spec-driven-tdd](schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
+| [spec-driven-tdd](src/schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
 
 ## Development harness
 
