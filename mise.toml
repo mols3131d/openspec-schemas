@@ -1,0 +1,74 @@
+# Tools and agent asset tasks for the OpenSpec schema repository.
+# Review external downloads and version changes before installing.
+[tools]
+node = "26"
+rumdl = "0"
+"npm:@biomejs/biome" = "2"
+lefthook = "2"
+"npm:rulesync" = "43"
+"npm:@fission-ai/openspec" = "2"
+
+[settings]
+task.run_auto_install = false
+
+[tasks.setup]
+description = "Set up Agent Skills and the local Git commit template"
+depends = ["agents-setup"]
+run = "git config --local commit.template .gitmessage"
+
+[tasks.agents-setup]
+description = "Resolve external Skills, generate native projections, and maintain generated ignore entries"
+run = "node scripts/manage-agent-assets.ts setup"
+
+[tasks.agents-restore]
+description = "Restore selected Skills from a reviewed rulesync.lock; fail when it does not cover all sources"
+run = "node scripts/manage-agent-assets.ts restore"
+
+[tasks.agents-check]
+description = "Validate Rulesync configuration without requiring installed .rulesync artifacts (not runtime activation)"
+run = "node scripts/manage-agent-assets.ts check"
+
+[tasks.agents-preview]
+description = "Preview Rulesync target projections after setup or restore (requires .rulesync)"
+run = "node scripts/manage-agent-assets.ts preview"
+
+[tasks.agents-refresh]
+description = "Explicitly update upstream Skill revisions, regenerate target projections, and maintain ignore entries"
+run = "node scripts/manage-agent-assets.ts refresh"
+
+[tasks.agents-retire]
+description = "Preview retired target/feature cleanup; add --apply to remove generated outputs and sync ignores"
+run = "node scripts/manage-agent-assets.ts retire"
+
+[tasks.markdown-check]
+description = "Lint and format-check tracked Markdown except noncanonical inbox files"
+run = "node scripts/check-markdown.ts"
+
+[tasks.schema-check]
+description = "Validate src/schemas using the configured OpenSpec CLI in an isolated temporary project"
+run = "node scripts/check-openspec-schemas.ts"
+
+[tasks.agents-smoke]
+description = "Opt-in integration smoke: install, preview, frozen restore and preview agent projections (writes local state)"
+run = [
+  "node scripts/manage-agent-assets.ts setup",
+  "node scripts/manage-agent-assets.ts preview",
+  "node scripts/manage-agent-assets.ts restore",
+  "node scripts/manage-agent-assets.ts preview",
+]
+
+[tasks.format]
+description = "Format Markdown and Biome-supported files across the repository; writes changes"
+run = [
+  "rumdl fmt .",
+  "biome format --write .",
+]
+
+[tasks.check]
+description = "Read-only checks, including a temporary-project OpenSpec runtime smoke test"
+run = [
+  "node scripts/check-markdown.ts",
+  "biome check .",
+  "lefthook validate",
+  "node scripts/check-openspec-schemas.ts",
+]

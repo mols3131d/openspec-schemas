@@ -1,0 +1,86 @@
+name: spec-driven-tdd
+version: 1
+description: Spec-driven planning with TDD-compatible execution
+
+artifacts:
+  - id: proposal
+    generates: proposal.md
+    description: Change intent, scope, and affected capabilities when applicable
+    template: proposal.md
+    instruction: |
+      변경의 이유, 범위와 영향을 받는 capability만 합의한다.
+
+      구현 접근, 작업 순서와 review process는 기록하지 않는다.
+      기존 capability로 설명할 수 있는 변경에는 새 capability를 만들지 않는다.
+      Spec-level behavior가 바뀌지 않는 pure refactor, tooling 또는 docs 변경이면
+      Change metadata에 `skip_specs: true`를 설정하고 capability나 delta Spec을 만들지 않는다.
+      독립적으로 구현하고 검증할 수 있는 새 범위는 별도 Change로 분리한다.
+
+      후속 Specs를 범위 추측 없이 작성하거나 Specs가 필요 없음을 명확히 판단할 수 있으면 완료한다.
+    requires: []
+
+  - id: specs
+    generates: "specs/**/*.md"
+    description: Verifiable behavior contracts for affected capabilities
+    template: spec.md
+    instruction: |
+      Proposal 범위의 관찰 가능하고 검증 가능한 행동 계약을 정의한다.
+
+      Change metadata의 `skip_specs: true`는 spec-level behavior 변화가 없는 경우에만 사용하며,
+      이 경우 delta Spec을 만들거나 validation을 위해 Requirement를 발명하지 않는다.
+      그 외에는 구현 방법을 넣지 않고 중요한 정상 동작, 실패 조건과 경계만 표현한다.
+      각 Requirement는 검증 가능한 Scenario로 확인할 수 있어야 한다.
+
+      변경되는 행동이 충분히 검증 가능하게 정의되면 완료한다.
+    requires:
+      - proposal
+
+  - id: design
+    generates: design.md
+    description: Non-obvious technical delta not owned by other planning artifacts
+    template: design.md
+    instruction: |
+      Proposal과 적용되는 Specs는 prerequisite로 참조하고 다시 요약하지 않는다.
+
+      Tasks에 필요한 non-obvious technical delta만 기록한다.
+      Observable behavior를 새로 소유하지 말고 Specs로 되돌린다.
+      추가 technical delta가 없으면 기존 architecture를 따른다는 한 문장으로 끝낸다.
+
+      다른 planning artifact의 내용을 반복하지 않고 남은 구현 ambiguity를 해소하면 완료한다.
+    requires:
+      - proposal
+      - specs
+
+  - id: tasks
+    generates: tasks.md
+    description: Ordered and verifiable implementation outcomes
+    template: tasks.md
+    instruction: |
+      적용되는 Specs와 Design을 독립적으로 검증 가능한 구현 결과로 나눈다.
+
+      각 task는 하나의 구현 결과와 객관적인 완료 조건을 가진다.
+      행동 변경은 test-first feedback을 포함하되 RED, GREEN, REFACTOR를 별도 task로 나누지 않는다.
+      Review, self-review, 승인 대기 같은 process 또는 gate state를 task로 만들지 않는다.
+      Design은 새로운 Requirement의 source가 아니다. Design에서 Proposal이나 Specs가 소유하지 않는 observable behavior가 발견되면
+      Tasks로 흡수하지 말고 원인을 소유하는 planning artifact로 되돌린다.
+
+      모든 계획 범위가 중복 없이 의존성 순서의 task로 연결되면 완료한다.
+    requires:
+      - specs
+      - design
+
+apply:
+  requires:
+    - tasks
+  tracks: tasks.md
+  instruction: |
+    미완료 task를 의존성 순서로 구현한다.
+
+    행동 변경은 프로젝트 지침에 맞는 test-first feedback loop를 사용한다.
+    실행 중 계획 오류가 확인되면 원인을 소유하는 artifact를 수정하고
+    직접 영향받는 downstream artifact만 다시 일치시킨다.
+
+    현재 Change 범위의 미완료 작업이나 결함은 기존 owning task가 있으면 다시 열거나 수정한다.
+    owning task가 없으면 누락된 결과를 위한 가장 작은 implementation task만 추가한다.
+    Review remediation, self-review 또는 process 자체를 별도 workstream으로 만들지 않는다.
+    독립적인 새 요구사항이나 범위는 현재 Change에 흡수하지 않고 별도 Change로 분리한다.

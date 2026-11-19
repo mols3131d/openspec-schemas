@@ -1,0 +1,85 @@
+{
+  "lockfileVersion": 1,
+  "sources": {
+    "mols3131d/mols-agent-assets": {
+      "requestedRef": "main",
+      "resolvedRef": "df82086d0fac43f96dea17ff92a64466605e9402",
+      "resolvedAt": "2026-11-19T09:19:42.142Z",
+      "skills": {
+        "artifact-consistency-inspector": {
+          "integrity": "sha256-6cb2ff6eafb3ea0d0d7974bdb8068d0f8098d9a40321ab808509b6bf8cd2d43b"
+        },
+        "check-dependencies": {
+          "integrity": "sha256-ce225b8d0d4ba6ef22d6c2ca4356d6e98666802e560c33ddfc2a431edaee185a"
+        },
+        "github-context": {
+          "integrity": "sha256-ba5201fd19cc7939ddbdd4300ea01f227670a64f1863e26ee6805429f4635191"
+        },
+        "mols-agent-asset-find": {
+          "integrity": "sha256-4c409ebc900adf04d6db6c053b14256e3f8427cd631ab73f4333bc17e1abe1a2"
+        },
+        "mols-chatbot-bootstrap": {
+          "integrity": "sha256-9e184ecb2175c262ea243d0c5b3861b6aa3a2b39275402433c016e0488917cea"
+        },
+        "mols-ci-design": {
+          "integrity": "sha256-d1e45b38bab766af738f50b2828ce615eacf2ec4d63b5c8cd9b83b31344161b5"
+        },
+        "mols-dev-env-bootstrap-design": {
+          "integrity": "sha256-9eeacfa3e79ac9f5002177d910734e82c66f458bf8d2f54bae6fc050d4ea291d"
+        },
+        "mols-documentation": {
+          "integrity": "sha256-ee5f551562cd99b9e1a4a31ff6a512c2b06655d28933fd5f3b80f8a7abe6fd39"
+        },
+        "mols-loops": {
+          "integrity": "sha256-f3f3de0ae4d899fe029748440d537b2a0624074e238a575dce7565916efa5c9f"
+        },
+        "mols-markdown-maintenance": {
+          "integrity": "sha256-791f2ef01817a0312fed6cad5c31ef16d014276624da30c5e94f8b414f2504c7"
+        },
+        "mols-mermaid-diagram": {
+          "integrity": "sha256-da671d353ab39b2bbd5ec6675e7c0bf67e2937c5bf1f71a028b4b74923edf76e"
+        },
+        "mols-test-design": {
+          "integrity": "sha256-1626668880f540eea45525561f579c97318c6f61170875053ed72c9d3d7670d6"
+        },
+        "review-changes": {
+          "integrity": "sha256-0a12ded4f2a28b9c6cab57d6423e294503b0e2d1e124c5b1925fe1761abbd9aa"
+        },
+        "technical-document-fidelity": {
+          "integrity": "sha256-ae0cd88ac490bb23e52d909f030750e1177f6f59fa6c3749d6f2bef2edb01a78"
+        }
+      },
+      "skillSelection": [
+        "artifact-consistency-inspector",
+        "check-dependencies",
+        "github-context",
+        "mols-agent-asset-find",
+        "mols-chatbot-bootstrap",
+        "mols-ci-design",
+        "mols-dev-env-bootstrap-design",
+        "mols-documentation",
+        "mols-loops",
+        "mols-markdown-maintenance",
+        "mols-mermaid-diagram",
+        "mols-test-design",
+        "review-changes",
+        "technical-document-fidelity"
+      ],
+      "skillsPath": "src/rulesync/.rulesync/skills"
+    },
+    "dyoshikawa/rulesync": {
+      "requestedRef": "main",
+      "resolvedRef": "9bca22fc5f3c634fb32f246ce75dc594bb00a77a",
+      "resolvedAt": "2026-11-19T09:19:42.146Z",
+      "skills": {
+        "rulesync": {
+          "integrity": "sha256-658851f4f3b4c432820cc1ed54bd294a699f171ee28d1da9a3c89e5a3b26a96f"
+        }
+      },
+      "skillSelection": [
+        "rulesync"
+      ],
+      "skillsPath": "skills"
+    }
+  }
+}
