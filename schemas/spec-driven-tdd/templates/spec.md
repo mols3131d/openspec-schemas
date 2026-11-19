@@ -12,6 +12,7 @@ type: openspec-spec-driven-tdd-spec
 <!--
 형식 규칙:
 - OpenSpec delta heading과 `### Requirement:`, `#### Scenario:` 형식은 파싱 계약으로 유지한다.
+- `{{...}}` placeholder는 실제 고유한 Requirement/Scenario 이름으로 교체한다.
 - 하나의 파일은 하나의 Capability를 다룬다.
 - tags를 사용하면 Proposal 분류와 충돌하지 않게 하고 capability tag는 Spec 경로와 일치시킨다.
 - Requirement는 SHALL 또는 MUST를 사용한다.
@@ -33,11 +34,11 @@ Archive 시 새 main spec의 Purpose로 복사되므로 50자 이상의 완전�
 
 ## ADDED Requirements
 
-### Requirement: <requirement name>
+### Requirement: {{added-requirement-name}}
 
 <시스템이 보장해야 하는 행동을 SHALL 또는 MUST로 작성한다.>
 
-#### Scenario: <scenario name>
+#### Scenario: {{added-scenario-name}}
 
 - **WHEN** - <행동을 유발하는 조건 또는 입력>
 - **THEN** - <관찰되어야 하는 결과>
@@ -49,11 +50,11 @@ OPTIONAL SECTION: 기존 Requirement의 행동이나 계약이 바뀔 때만 유
 
 ## MODIFIED Requirements
 
-### Requirement: <existing requirement name>
+### Requirement: {{modified-requirement-name}}
 
 <변경 후 시스템이 보장해야 하는 전체 행동>
 
-#### Scenario: <scenario name>
+#### Scenario: {{modified-scenario-name}}
 
 - **WHEN** - <행동을 유발하는 조건 또는 입력>
 - **THEN** - <변경 후 관찰되어야 하는 결과>
@@ -62,7 +63,7 @@ OPTIONAL SECTION: 기존 Requirement의 행동이나 계약이 바뀔 때만 유
 
 ## REMOVED Requirements
 
-### Requirement: <existing requirement name>
+### Requirement: {{removed-requirement-name}}
 
 - **Reason** - <제거 이유>
 - **Migration** - <전환 방법 또는 대체 행동>
