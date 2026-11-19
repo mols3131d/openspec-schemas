@@ -1,0 +1,53 @@
+[global]
+flavor = "gfm"
+disable = ["MD013", "MD025", "MD033", "MD041"]
+exclude = [
+  "**/.git/",
+  "**/.tmp/",
+  "**/tmp/",
+  "**/archive/",
+  "**/*.tmp.*",
+  ".rumdl_cache/**",
+]
+
+extend-enable = [
+  "MD060",
+  "MD070",
+  "MD073",
+  "MD080",
+]
+
+[MD003]
+style = "atx"
+
+[MD004]
+style = "dash"
+
+[MD029]
+style = "ordered"
+
+[MD033]
+disallowed-elements = ["gfm"]
+fix = false
+
+[MD046]
+style = "fenced"
+
+[MD048]
+style = "backtick"
+
+[MD049]
+style = "asterisk"
+
+[MD050]
+style = "asterisk"
+
+[MD054]
+style = "inline"
+
+[MD057]
+compact-paths = true
+
+[MD060]
+style = "compact"
+loose-last-column = true
