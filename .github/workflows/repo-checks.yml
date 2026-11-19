@@ -24,8 +24,6 @@ jobs:
       - run: mise run agents-check
       - run: mise run schema-check
       - run: mise exec -- node --test tests/scripts/manage-agent-assets.test.ts
-      - run: |
-          git ls-files -z '*.md' ':!.inbox/**' | xargs -0 -r mise exec -- rumdl check
-          git ls-files -z '*.md' ':!.inbox/**' | xargs -0 -r mise exec -- rumdl fmt --check
+      - run: mise run markdown-check
       - run: mise exec -- biome check .
       - run: mise exec -- lefthook validate

@@ -40,6 +40,10 @@ run = "node scripts/manage-agent-assets.ts refresh"
 description = "Preview retired target/feature cleanup; add --apply to remove generated outputs and sync ignores"
 run = "node scripts/manage-agent-assets.ts retire"
 
+[tasks.markdown-check]
+description = "Lint and format-check tracked Markdown except noncanonical inbox files"
+run = "node scripts/check-markdown.ts"
+
 [tasks.schema-check]
 description = "Validate src/schemas using the pinned OpenSpec CLI in an isolated temporary project"
 run = "node scripts/check-openspec-schemas.ts"
@@ -63,8 +67,7 @@ run = [
 [tasks.check]
 description = "Read-only checks, including a temporary-project OpenSpec runtime smoke test"
 run = [
-  "rumdl check .",
-  "rumdl fmt --check .",
+  "node scripts/check-markdown.ts",
   "biome check .",
   "lefthook validate",
   "node scripts/check-openspec-schemas.ts",
