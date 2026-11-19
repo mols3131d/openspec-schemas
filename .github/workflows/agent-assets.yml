@@ -1,0 +1,30 @@
+name: Agent asset integration
+
+on:
+  pull_request:
+    paths:
+      - "mise.toml"
+      - "rulesync.jsonc"
+      - "scripts/manage-agent-assets.ts"
+      - "rulesync.lock"
+      - ".github/workflows/agent-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  restore:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+      - uses: jdx/mise-action@v5
+      - name: Initial agent source installation and frozen recovery
+        run: |
+          mise run agents-smoke
+          test -s rulesync.lock
+          echo '--- reviewed-lock-candidate-start ---'
+          cat rulesync.lock
+          echo '--- reviewed-lock-candidate-end ---'
