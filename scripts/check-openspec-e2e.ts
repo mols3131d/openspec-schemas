@@ -32,10 +32,9 @@ function run(project: string, executable: string, args: string[]): string {
   } catch (error) {
     const failure = error as Error & { stderr?: string };
     throw new Error(
-      [
-        [executable, ...args].join(" "),
-        failure.stderr ?? failure.message,
-      ].join(": "),
+      [[executable, ...args].join(" "), failure.stderr ?? failure.message].join(
+        ": ",
+      ),
       { cause: error },
     );
   }
@@ -65,9 +64,10 @@ function check(): void {
     const status = (): {
       isComplete: boolean;
       artifacts: { id: string; status: string }[];
-    } => JSON.parse(
-      run(project, "openspec", ["status", "--change", change, "--json"]),
-    );
+    } =>
+      JSON.parse(
+        run(project, "openspec", ["status", "--change", change, "--json"]),
+      );
     const state = (id: string) =>
       status().artifacts.find((artifact) => artifact.id === id)?.status;
     const copy = (file: string) => {
@@ -87,7 +87,10 @@ function check(): void {
     copy("tasks.md");
 
     assert.equal(status().isComplete, true);
-    assert.equal(status().artifacts.every((item) => item.status === "done"), true);
+    assert.equal(
+      status().artifacts.every((item) => item.status === "done"),
+      true,
+    );
     assert.ok(
       run(project, "openspec", [
         "instructions",
