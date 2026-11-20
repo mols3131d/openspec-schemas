@@ -23,6 +23,7 @@ jobs:
       - uses: jdx/mise-action@v5
       - run: mise run agents-check
       - run: mise run schema-check
+      - run: mise run e2e-check
       - run: mise exec -- node --test tests/scripts/manage-agent-assets.test.ts
       - run: mise run markdown-check
       - run: mise exec -- biome check .

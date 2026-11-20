@@ -40,6 +40,14 @@ run = "node scripts/manage-agent-assets.ts refresh"
 description = "Preview retired target/feature cleanup; add --apply to remove generated outputs and sync ignores"
 run = "node scripts/manage-agent-assets.ts retire"
 
+[tasks.e2e-init]
+description = "Reset a local OpenSpec consumer example under .tmp/"
+run = "node scripts/check-openspec-e2e.ts init"
+
+[tasks.e2e-check]
+description = "Verify the consumer OpenSpec lifecycle in an isolated temporary project"
+run = "node scripts/check-openspec-e2e.ts"
+
 [tasks.markdown-check]
 description = "Lint and format-check tracked Markdown except noncanonical inbox files"
 run = "node scripts/check-markdown.ts"
@@ -71,4 +79,5 @@ run = [
   "biome check .",
   "lefthook validate",
   "node scripts/check-openspec-schemas.ts",
+  "node scripts/check-openspec-e2e.ts",
 ]

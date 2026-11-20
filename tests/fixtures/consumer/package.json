@@ -1,0 +1,8 @@
+{
+  "name": "openspec-consumer-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}
