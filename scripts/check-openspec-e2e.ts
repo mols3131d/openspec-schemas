@@ -7,7 +7,6 @@ import {
   mkdtempSync,
   readFileSync,
   rmSync,
-  writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -33,7 +32,10 @@ function run(project: string, executable: string, args: string[]): string {
   } catch (error) {
     const failure = error as Error & { stderr?: string };
     throw new Error(
-      [executable, ...args].join(" ") + ": " + (failure.stderr ?? failure.message),
+      [
+        [executable, ...args].join(" "),
+        failure.stderr ?? failure.message,
+      ].join(": "),
       { cause: error },
     );
   }
@@ -52,12 +54,6 @@ function initialize(project: string): void {
   });
 }
 
-function write(project: string, path: string, content: string): void {
-  const destination = join(project, "openspec", "changes", change, path);
-  mkdirSync(dirname(destination), { recursive: true });
-  writeFileSync(destination, content.trimStart(), "utf8");
-}
-
 function check(): void {
   const project = mkdtempSync(join(tmpdir(), "openspec-consumer-"));
   try {
@@ -66,115 +62,65 @@ function check(): void {
     run(project, "openspec", ["schema", "validate", schema]);
     run(project, "openspec", ["new", "change", change, "--schema", schema]);
 
-    const status = () => JSON.parse(
-      run(project, "openspec", ["status", "--change", change, "--json"]),
-    ) as {
+    const status = (): {
       isComplete: boolean;
       artifacts: { id: string; status: string }[];
+    } => JSON.parse(
+      run(project, "openspec", ["status", "--change", change, "--json"]),
+    );
+    const state = (id: string) =>
+      status().artifacts.find((artifact) => artifact.id === id)?.status;
+    const copy = (file: string) => {
+      const destination = join(project, "openspec", "changes", change, file);
+      mkdirSync(dirname(destination), { recursive: true });
+      cpSync(join(root, "tests", "fixtures", "change", file), destination);
     };
-    const state = (id: string) => status().artifacts.find(
-      (artifact) => artifact.id === id,
-    )?.status;
 
     assert.equal(state("proposal"), "ready");
     assert.equal(state("specs"), "blocked");
-
-    write(project, "proposal.md", [
-      "---",
-      "title: Document increment",
-      "description: Record the counter's existing increment behavior",
-      "type: openspec-spec-driven-tdd-proposal",
-      "---",
-      "",
-      "## Why",
-      "Document a minimal working behavior.",
-      "",
-      "## What Changes",
-      "- Describe the existing increment operation.",
-      "",
-      "## Capabilities",
-      "### New Capabilities",
-      "#### \`counter\`",
-      "- Incrementing an integer returns its successor.",
-      "",
-    ].join("\n"));
-
+    copy("proposal.md");
     assert.equal(state("specs"), "ready");
-    write(project, "specs/counter/spec.md", [
-      "---",
-      "category: spec",
-      "title: counter",
-      "description: Increment behavior",
-      "type: openspec-spec-driven-tdd-spec",
-      "---",
-      "",
-      "## Purpose",
-      "This capability describes an existing small counter operation,",
-      "making its externally observable increment behavior testable.",
-      "",
-      "## ADDED Requirements",
-      "### Requirement: Increment returns the next integer",
-      "The counter MUST return the next integer for an increment call.",
-      "",
-      "#### Scenario: Increment by one",
-      "- **WHEN** increment is called with the value 1",
-      "- **THEN** the result is 2",
-      "",
-    ].join("\n"));
-
+    copy("specs/counter/spec.md");
     assert.equal(state("design"), "ready");
-    write(project, "design.md", [
-      "---",
-      "title: Counter increment",
-      "description: No new technical design is necessary",
-      "type: openspec-spec-driven-tdd-design",
-      "---",
-      "",
-      "## Technical Delta",
-      "기존 구조를 그대로 따른다.",
-      "",
-    ].join("\n"));
-
+    copy("design.md");
     assert.equal(state("tasks"), "ready");
-    write(project, "tasks.md", [
-      "---",
-      "category: tasks",
-      "title: Counter increment",
-      "description: Verify the existing increment function",
-      "type: openspec-spec-driven-tdd-tasks",
-      "---",
-      "",
-      "## Tasks",
-      "- [x] Verify increment behavior",
-      "  - **Done when:** \`node --test\` passes.",
-      "",
-    ].join("\n"));
+    copy("tasks.md");
 
     assert.equal(status().isComplete, true);
     assert.equal(status().artifacts.every((item) => item.status === "done"), true);
-    assert.ok(run(project, "openspec", [
-      "instructions", "apply", "--change", change, "--json",
-    ]).trim());
-    // OpenSpec v2 warns about custom delta frontmatter; errors still fail validation.
+    assert.ok(
+      run(project, "openspec", [
+        "instructions",
+        "apply",
+        "--change",
+        change,
+        "--json",
+      ]).trim(),
+    );
+    // OpenSpec v2 warns about custom delta frontmatter; errors still fail.
     run(project, "openspec", ["validate", change, "--no-interactive"]);
 
-    const result = JSON.parse(run(project, "openspec", [
-      "archive", change, "--yes", "--json",
-    ])) as { archive: { archivedAs: string; specsUpdated: boolean } };
+    const result = JSON.parse(
+      run(project, "openspec", ["archive", change, "--yes", "--json"]),
+    ) as { archive: { archivedAs: string; specsUpdated: boolean } };
     assert.equal(result.archive.specsUpdated, true);
-    assert.ok(existsSync(join(
-      project, "openspec", "changes", "archive", result.archive.archivedAs,
+    const archivedTasks = join(
+      project,
+      "openspec",
+      "changes",
+      "archive",
+      result.archive.archivedAs,
       "tasks.md",
-    )));
-    assert.match(readFileSync(
-      join(project, "openspec", "specs", "counter", "spec.md"), "utf8",
-    ), /Requirement: Increment returns the next integer/);
+    );
+    assert.ok(existsSync(archivedTasks));
+    const mainSpec = join(project, "openspec", "specs", "counter", "spec.md");
+    assert.match(
+      readFileSync(mainSpec, "utf8"),
+      /Requirement: Increment returns the next integer/,
+    );
 
-    // Re-initialization must discard all previous generated OpenSpec state.
     initialize(project);
-    assert.equal(existsSync(join(
-      project, "openspec", "specs", "counter", "spec.md",
-    )), false);
+    assert.equal(existsSync(mainSpec), false);
     run(project, "node", ["--test"]);
     console.log("OpenSpec consumer E2E passed");
   } finally {
@@ -184,7 +130,7 @@ function check(): void {
 
 if (process.argv[2] === "init" && process.argv.length === 3) {
   initialize(example);
-  console.log("Initialized example: " + example);
+  console.log("Initialized example:", example);
 } else if (process.argv.length === 2) {
   check();
 } else {
