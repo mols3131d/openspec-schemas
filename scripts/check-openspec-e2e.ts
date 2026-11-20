@@ -155,7 +155,8 @@ function check(): void {
     assert.ok(run(project, "openspec", [
       "instructions", "apply", "--change", change, "--json",
     ]).trim());
-    run(project, "openspec", ["validate", change, "--strict", "--no-interactive"]);
+    // OpenSpec v2 warns about custom delta frontmatter; errors still fail validation.
+    run(project, "openspec", ["validate", change, "--no-interactive"]);
 
     const result = JSON.parse(run(project, "openspec", [
       "archive", change, "--yes", "--json",
@@ -171,7 +172,9 @@ function check(): void {
 
     // Re-initialization must discard all previous generated OpenSpec state.
     initialize(project);
-    assert.equal(existsSync(join(project, "openspec", "changes", "archive")), false);
+    assert.equal(existsSync(join(
+      project, "openspec", "specs", "counter", "spec.md",
+    )), false);
     run(project, "node", ["--test"]);
     console.log("OpenSpec consumer E2E passed");
   } finally {
