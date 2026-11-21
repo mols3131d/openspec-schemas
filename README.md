@@ -5,6 +5,7 @@
 ## Goals
 
 - OpenSpec 표준 프로젝트 경로 `openspec/schemas/`에서 커스텀 스키마를 정의하고 검증
+- 재사용 가능한 OpenSpec 커스터마이징 Skill의 작성 원본을 `src/skills/`에서 관리
 
 ## Directory Structure
 
@@ -15,6 +16,8 @@ openspec-schemas/
 │       └── spec-driven-tdd/
 ├── docs/
 ├── scripts/
+├── src/
+│   └── skills/              # 재사용 Skill의 관리 원본
 ├── AGENTS.md
 ├── CHATBOT.md
 └── README.md
@@ -27,6 +30,12 @@ openspec-schemas/
 | Schema | Description |
 | --- | --- |
 | [spec-driven-tdd](openspec/schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
+
+## Skills
+
+- [mols-openspec-customize](src/skills/mols-openspec-customize/SKILL.md) — OpenSpec 커스터마이징 설계·검토·튜닝 Skill 및 [선택적 참조 문서](src/skills/mols-openspec-customize/references/).
+
+이 Skill은 저장소에서 관리하는 재사용 원본으로, 로컬 에이전트에 자동 설치·활성화되지는 않습니다.
 
 ## Development harness
 
