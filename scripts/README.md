@@ -10,4 +10,4 @@ description: "이 저장소의 자산 관리 스크립트와 실행 명령을 �
 
 변경 시 [tests](../tests/scripts/manage-agent-assets.test.ts)를 검토합니다.
 
-[check-markdown.ts](check-markdown.ts)는 Git이 추적하는 Markdown 중 `.inbox/`를 제외한 파일을 lint·format-check하여 로컬 `mise run check`와 CI의 검사 범위를 일치시킨다. [check-openspec-schemas.ts](check-openspec-schemas.ts)는 임시 OpenSpec 프로젝트에 정본 스키마를 복사해 CLI 검증을 수행한다.
+[check-markdown.ts](check-markdown.ts)는 Git이 추적하는 Markdown 중 `.inbox/`를 제외한 파일을 lint·format-check하여 로컬 `mise run check`와 CI의 검사 범위를 일치시킨다. [check-openspec-schemas.ts](check-openspec-schemas.ts)는 OpenSpec 표준 경로의 스키마를 임시 프로젝트에 복사해 CLI 검증을 수행한다.

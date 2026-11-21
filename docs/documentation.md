@@ -20,7 +20,7 @@ description: "저장소 및 스키마 관련 문서 작성 표준, 구조화 방
 - [documentation.md](documentation.md): 문서 작성 기준 및 스타일 가이드
 - [README.md](README.md): 공통 문서 인덱스
 
-### 2. Schema-Level Documentation (`src/schemas/<schema-name>/`)
+### 2. Schema-Level Documentation (`openspec/schemas/<schema-name>/`)
 
 개별 커스텀 스키마의 구조, 의도, 아키텍처 및 변경 이력을 다룹니다.
 
@@ -74,7 +74,7 @@ flowchart LR
 
 ## Template In-file Documentation
 
-템플릿 파일([templates/](../src/schemas/spec-driven-tdd/templates/)) 내부에는 HTML 주석(`<!-- ... -->`)을 사용하여 작성 규칙을 내장합니다.
+템플릿 파일([templates/](../openspec/schemas/spec-driven-tdd/templates/)) 내부에는 HTML 주석(`<!-- ... -->`)을 사용하여 작성 규칙을 내장합니다.
 
 - **작성 규칙**: 각 섹션의 목적과 작성 시 주의사항을 명시합니다.
 - **선택적 섹션(Optional Sections)**: 불필요한 경우 섹션 전체를 삭제할 수 있는 기준을 안내합니다.
