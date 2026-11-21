@@ -55,15 +55,15 @@ a reference chain merely because links exist.
 
 1. Classify the request as exact contract, reusable guidance, project evidence, or a
    combination.
-1. Load only references that can materially change the decision.
-1. For a concrete repository, inspect applicable live instructions and current
+2. Load only references that can materially change the decision.
+3. For a concrete repository, inspect applicable live instructions and current
    OpenSpec state before project-specific recommendations or mutations.
-1. When ownership is at issue, choose the smallest coherent customization owner.
-1. When quality or fit needs empirical evidence, dogfood representative work and
+4. When ownership is at issue, choose the smallest coherent customization owner.
+5. When quality or fit needs empirical evidence, dogfood representative work and
    tune the observed owner instead of stacking compensating instructions.
-1. Match verification to the claim; consult the exact OpenSpec contract only when
+6. Match verification to the claim; consult the exact OpenSpec contract only when
    exact behavior matters.
-1. When the distinction matters, report **Official**, **Reusable**, and **Project**
+7. When the distinction matters, report **Official**, **Reusable**, and **Project**
    conclusions separately.
 
 ## Self-check

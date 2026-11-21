@@ -34,9 +34,9 @@ Stop when more context is unlikely to change the customization decision.
 For each requested behavior, answer:
 
 1. What repository or dogfood evidence requires it?
-1. Which source already owns that policy, fact, or failure mode?
-1. Does OpenSpec actually need to consume or structurally encode it?
-1. What is the smallest project-specific delta OpenSpec needs?
+2. Which source already owns that policy, fact, or failure mode?
+3. Does OpenSpec actually need to consume or structurally encode it?
+4. What is the smallest project-specific delta OpenSpec needs?
 
 If the owning customization surface is unclear, use
 [Customization design](customization-design.md). Use

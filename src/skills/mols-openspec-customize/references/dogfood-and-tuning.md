@@ -36,11 +36,11 @@ For each material problem:
 
 1. capture the observed behavior, artifact problem, workflow friction, or recurring
    maintainer correction;
-1. state the expected behavior and why it matters;
-1. identify the narrowest owner: project configuration, schema graph, template,
+2. state the expected behavior and why it matters;
+3. identify the narrowest owner: project configuration, schema graph, template,
    schema instruction, repository policy, or something outside OpenSpec;
-1. make the smallest coherent change at that owner;
-1. rerun the affected case and check likely regressions.
+4. make the smallest coherent change at that owner;
+5. rerun the affected case and check likely regressions.
 
 Do not compensate for a template problem with broad project context, or for a
 repository-policy problem with duplicated schema instructions. If the correct owner
@@ -70,10 +70,10 @@ Static review proves only static properties. Use the cheapest evidence that answ
 the actual question:
 
 1. validate schema or config structure when machine-checkable validation exists;
-1. inspect resolved schema, templates, or instructions when selection, precedence,
+2. inspect resolved schema, templates, or instructions when selection, precedence,
    or injected behavior matters;
-1. run representative dogfood cases when judging artifact quality or project fit;
-1. review understandability and maintainability when they are part of acceptance.
+3. run representative dogfood cases when judging artifact quality or project fit;
+4. review understandability and maintainability when they are part of acceptance.
 
 When verification depends on an exact command, field, path, precedence rule, or
 version-specific behavior, use [Official contract](official-contract.md) instead of

@@ -38,9 +38,9 @@ Use `README.md` when the runtime files alone do not let users or maintainers qui
 answer:
 
 1. What is this schema for?
-1. When should it be used or avoided?
-1. What is intentionally different about its workflow or artifact flow?
-1. Where is deeper detail or the governing project authority?
+2. When should it be used or avoided?
+3. What is intentionally different about its workflow or artifact flow?
+4. Where is deeper detail or the governing project authority?
 
 Keep the README focused on orientation and navigation. It may point to inspection,
 validation, or dogfooding, but should not duplicate fast-changing CLI reference
