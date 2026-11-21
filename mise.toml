@@ -45,7 +45,7 @@ description = "Lint and format-check tracked Markdown except noncanonical inbox 
 run = "node scripts/check-markdown.ts"
 
 [tasks.schema-check]
-description = "Validate src/schemas using the configured OpenSpec CLI in an isolated temporary project"
+description = "Validate openspec/schemas using the configured OpenSpec CLI in an isolated temporary project"
 run = "node scripts/check-openspec-schemas.ts"
 
 [tasks.agents-smoke]

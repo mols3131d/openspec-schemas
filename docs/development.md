@@ -9,10 +9,10 @@ description: "OpenSpec 커스텀 스키마를 개발, 확장 및 유지보수하
 
 ## Schema Layout
 
-각 커스텀 스키마는 `src/schemas/<schema-name>/` 디렉터리 아래에 위치하며, 다음과 같은 표준 구조를 유지해야 합니다.
+각 커스텀 스키마는 `openspec/schemas/<schema-name>/` 디렉터리 아래에 위치하며, 다음과 같은 표준 구조를 유지해야 합니다.
 
 ```text
-src/schemas/<schema-name>/
+openspec/schemas/<schema-name>/
 ├── schema.yaml            # OpenSpec 스키마 정의 (Artifact DAG 및 Instructions)
 ├── README.md              # 스키마 개요, 워크플로우 및 사용법
 ├── docs/                  # 스키마 내부 아키텍처 및 유지보수 문서
@@ -69,11 +69,11 @@ src/schemas/<schema-name>/
 
 스키마의 지속 가능한 유지보수를 위해 모든 스키마는 설계 결정과 불변 조건을 명문화해야 합니다.
 
-1. **Architecture ([architecture.md](../src/schemas/spec-driven-tdd/docs/architecture.md))**:
+1. **Architecture ([architecture.md](../openspec/schemas/spec-driven-tdd/docs/architecture.md))**:
    - 아티팩트 간의 책임 분리(Responsibility Separation)
    - Mermaid 기반의 워크플로우 다이어그램
    - 설계 근거(Design Rationale) 및 계약 소유권(Contract Ownership)
-2. **Baseline ([baseline.md](../src/schemas/spec-driven-tdd/docs/baseline.md))**:
+2. **Baseline ([baseline.md](../openspec/schemas/spec-driven-tdd/docs/baseline.md))**:
    - **Requirements (R-xxx)**: 스키마가 충족해야 하는 불변의 요구사항
    - **Decisions (D-xxx)**: 설계 과정에서 채택된 결정과 배경 이유
    - **Invariants (I-xxx)**: 스키마 변경 시에도 절대 훼손되어서는 안 되는 제약

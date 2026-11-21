@@ -16,7 +16,7 @@ mise run setup
 mise run check
 ```
 
-개발 도구는 `mise.toml`에서 메이저 버전만 선언한다. `mise install`은 해당 메이저의 최신 사용 가능 릴리스를 설치할 수 있으며, 이미 설치된 일치 버전을 계속 사용 중이라면 `mise upgrade`로 같은 메이저 내 최신 버전으로 갱신한다. `rulesync.lock`은 개발 도구 버전과 별개로 외부 Agent Skills의 소스 리비전을 고정한다. 저장소의 `src/schemas/`는 배포 원본이며 OpenSpec의 프로젝트 탐색 경로가 아니다. 검증은 임시 프로젝트의 `openspec/schemas/`에 복사해 진행한다.
+개발 도구는 `mise.toml`에서 메이저 버전만 선언한다. `mise install`은 해당 메이저의 최신 사용 가능 릴리스를 설치할 수 있으며, 이미 설치된 일치 버전을 계속 사용 중이라면 `mise upgrade`로 같은 메이저 내 최신 버전으로 갱신한다. `rulesync.lock`은 개발 도구 버전과 별개로 외부 Agent Skills의 소스 리비전을 고정한다. 스키마는 OpenSpec 표준 경로 `openspec/schemas/`에 두므로 CLI가 이 저장소에서도 직접 탐색할 수 있다. Change 생성 스모크 테스트는 원본 변경을 피하도록 임시 OpenSpec 프로젝트에 스키마를 복사해 실행한다.
 
 `setup`은 Rulesync 소스를 가져오고 런타임별 projection·ignore 항목과 `rulesync.lock`을 생성하거나 기존 lock을 사용합니다. 이 clone의 Git commit template도 설정합니다. 잠금 파일과 생성 결과는 검토한 뒤 커밋합니다. 이 PR에서는 격리된 GitHub Actions 환경에서 최초 설치·잠금 기반 복원·projection 미리보기를 검증하고 `rulesync.lock`을 반영했다. CI의 OpenSpec 임시 검증과 외부 Skills의 설치는 별개다. Agent asset 통합 workflow는 읽기 전용 토큰으로 외부 GitHub 소스를 조회하며 검토된 `rulesync.lock` 기준으로 임시 runner에서 frozen restore와 projection preview를 검증한다. 로컬 자산 설치 결과는 이 PR의 정적 검사만으로 보장되지 않는다.
 
@@ -28,7 +28,7 @@ mise run check
 | --- | --- |
 | `mise run check` | 추적 중인 Markdown (`.inbox` 제외), Biome, Lefthook 구성 및 OpenSpec schema runtime smoke 검사 (임시 디렉터리 사용) |
 | `mise run markdown-check` | CI와 동일하게 Git이 추적하는 Markdown만 검사 (`.inbox` 제외) |
-| `mise run schema-check` | 모든 `src/schemas/` 스키마를 임시 OpenSpec 프로젝트에서 resolve, validate, change 생성, instructions 확인 |
+| `mise run schema-check` | 모든 `openspec/schemas/` 스키마를 임시 OpenSpec 프로젝트에서 resolve, validate, change 생성, instructions 확인 |
 | `mise run agents-check` | Rulesync 설정 검사 (설치나 runtime activation 증거는 아님) |
 | `mise run agents-smoke` | 명시적 실행: 설치, projection 확인, 잠금 기반 restore를 다시 실행 (외부 다운로드/로컬 쓰기 발생) |
 | `mise exec -- node --test tests/scripts/manage-agent-assets.test.ts` | 자산 관리 스크립트 unit tests |

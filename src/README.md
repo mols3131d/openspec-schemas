@@ -1,10 +1,7 @@
-# Distributable Sources
+# Distributable Skills
 
-`src/`는 이 저장소에서 작성·유지보수하며 다른 저장소에 배포할 수 있는 **재사용 자산의 정본**을 관리한다.
+`src/`는 이 저장소가 작성하고 다른 저장소에 제공할 수 있는 재사용 Skill의 원본을 관리합니다.
 
-- [schemas/](schemas/) — OpenSpec 스키마와 그 템플릿·유지보수 문서
-- [skills/](skills/) — 이 저장소에서 작성하는 재사용 Agent Skills
+- [skills/](skills/) — OpenSpec 커스터마이징용 Agent Skill과 참조 자료
 
-저장소 공통 지침, 개발 도구, 새 스키마 작성을 위한 scaffold는 `src/` 밖에서 관리한다. 외부에서 가져온 Skills, 런타임별 생성 projection, 임시 작업 기록은 이 디렉터리의 정본이 아니다.
-
-`src/`에 배치하는 것만으로 다른 저장소에 자동 설치되거나 배포되지는 않는다. 배포 대상과 절차는 별도로 정의한다.
+OpenSpec의 실행 대상 커스텀 스키마는 `src/`가 아닌 표준 프로젝트 경로 [`openspec/schemas/`](../openspec/schemas/)에 있습니다. `src/`의 Skill은 별도 배포·설치가 필요한 작성 원본입니다.
