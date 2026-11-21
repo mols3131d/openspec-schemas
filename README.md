@@ -28,6 +28,10 @@ openspec-schemas/
 | --- | --- |
 | [spec-driven-tdd](src/schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
 
+## Skills
+
+- [mols-openspec-customize](src/skills/mols-openspec-customize/SKILL.md) — OpenSpec 커스터마이징의 설계·검토·튜닝용 재사용 Skill. [Reference](src/skills/mols-openspec-customize/references/)는 필요할 때 선택해 읽는다.
+
 ## Development harness
 
 에이전트 지침은 [AGENTS.md](AGENTS.md), 챗 런타임 진입점은 [CHATBOT.md](CHATBOT.md), 도구 설치·검증은 [Development Tooling](docs/tooling.md)을 참고합니다.
