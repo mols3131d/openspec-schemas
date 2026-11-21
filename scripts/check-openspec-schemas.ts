@@ -11,17 +11,16 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// The distributable source tree is not an OpenSpec project schema directory.
-// Validate a pristine copy in a temporary project without modifying sources.
+// Smoke-test a pristine copy in a temporary project without modifying source schemas.
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const schemas = join(root, "src", "schemas");
+const schemas = join(root, "openspec", "schemas");
 const names = readdirSync(schemas, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .sort();
 
 if (names.length === 0) {
-  throw new Error("No distributable schemas found in src/schemas/");
+  throw new Error("No project schemas found in openspec/schemas/");
 }
 for (const name of names) {
   if (!existsSync(join(schemas, name, "schema.yaml"))) {

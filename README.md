@@ -4,29 +4,29 @@
 
 ## Goals
 
-- 재사용 가능한 스키마와 Skill 등 배포 가능한 자산의 원본을 [src/](src/README.md)에서 관리
+- OpenSpec 표준 프로젝트 경로 `openspec/schemas/`에서 커스텀 스키마를 정의하고 검증
 
 ## Directory Structure
 
 ```text
 openspec-schemas/
+├── openspec/
+│   └── schemas/
+│       └── spec-driven-tdd/
 ├── docs/
-├── src/                       # 다른 저장소에도 배포 가능한 자산의 원본
-│   ├── schemas/               # OpenSpec 커스텀 스키마
-│   │   └── <schema-name>/
-│   └── skills/                # 재사용 가능한 Agent Skills
+├── scripts/
 ├── AGENTS.md
 ├── CHATBOT.md
 └── README.md
 ```
 
-`src/`의 배치만으로 외부 저장소에 자동 배포되지는 않습니다. 배포 방식과 대상은 별도로 정의합니다.
+이 저장소의 스키마는 OpenSpec CLI가 프로젝트 스키마로 탐색합니다. 다른 저장소에서 사용하려면 스키마 디렉터리를 해당 프로젝트에 복사하거나 별도로 배포해야 합니다.
 
 ## Schemas
 
 | Schema | Description |
 | --- | --- |
-| [spec-driven-tdd](src/schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
+| [spec-driven-tdd](openspec/schemas/spec-driven-tdd/README.md) | OpenSpec의 Artifact 의존성을 활용해 변경 의도부터 TDD 호환 구현까지 연결하는 계획 스키마 |
 
 ## Development harness
 
@@ -39,4 +39,4 @@ mise run check
 mise run schema-check
 ```
 
-설치와 최초 Rulesync 동기화는 외부 다운로드·로컬 쓰기를 포함하므로 설정을 검토한 다음 실행합니다. `mise run schema-check`는 임시 OpenSpec 프로젝트에서 스키마를 검증한다. 실제 외부 저장소 배포와 Skill 로딩은 별도로 확인해야 한다.
+설치와 최초 Rulesync 동기화는 외부 다운로드·로컬 쓰기를 포함하므로 설정을 검토한 다음 실행합니다. `mise run schema-check`는 임시 OpenSpec 프로젝트에서 스키마를 검증합니다. 다른 저장소에 대한 배포는 별도로 확인해야 합니다.
