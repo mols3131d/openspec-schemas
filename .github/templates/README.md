@@ -28,9 +28,10 @@ author:
 | --- | --- |
 | Issue (specific report or proposal, web UI) | [Native Issue forms](../ISSUE_TEMPLATE/) |
 | Issue (general request or API/Plugin) | [General Issue template](../ISSUE_TEMPLATE/issue.md) |
-| Pull request | [Native PR template](../pull_request_template.md) |
+| Pull request (default) | [Native PR template](../pull_request_template.md) |
+| Pull request (opt-in candidate) | [Compact candidate](../PULL_REQUEST_TEMPLATE/compact-candidate.md) — select explicitly with `template=compact-candidate.md` |
 | Issue or PR conversation comment | [Conversation comment](comment.md) |
 | PR review | [Review](pull-request-review.md) |
 | PR inline review comment | [Inline review](pull-request-inline-comment.md) |
 
-Comment/review authoring aids use illustrative `{{ value }}`, `{% if ... %}`, and `{% for ... %}` notation, not an installed template engine. For the Markdown Issue template, follow its HTML comments. In either case, omit unused sections and authoring directives before posting; do not duplicate GitHub-native statuses or review decisions.
+Comment/review authoring aids use illustrative `{{ value }}`, `{% if ... %}`, and `{% for ... %}` notation, not an installed template engine. Markdown templates use visible italic parenthetical writing guidance. Follow the relevant guidance, then remove it along with unused sections, examples, placeholders, and authoring notation before posting. Do not duplicate GitHub-native statuses or review decisions.
