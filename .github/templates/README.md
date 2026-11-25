@@ -28,8 +28,7 @@ author:
 | --- | --- |
 | Issue (specific report or proposal, web UI) | [Native Issue forms](../ISSUE_TEMPLATE/) |
 | Issue (general request or API/Plugin) | [General Issue template](../ISSUE_TEMPLATE/issue.md) |
-| Pull request (default) | [Native PR template](../pull_request_template.md) |
-| Pull request (opt-in candidate) | [Compact candidate](../PULL_REQUEST_TEMPLATE/compact-candidate.md) — select explicitly with `template=compact-candidate.md` |
+| Pull request | [Native PR template](../pull_request_template.md) |
 | Issue or PR conversation comment | [Conversation comment](comment.md) |
 | PR review | [Review](pull-request-review.md) |
 | PR inline review comment | [Inline review](pull-request-inline-comment.md) |
